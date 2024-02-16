@@ -1,28 +1,22 @@
-#ifndef TOKEN_H
-#define TOKEN_H
+#ifndef TOKEN_H //if not defined
+#define TOKEN_H //define
+#include <stdio.h> //standard
 
-#include <stdio.h>
-
-// Enum to represent different token types
-typedef enum {
+typedef enum { //define enum type for tokens
     NUMBER,
     OPERATOR,
     SYMBOL,
     WORD,
-    END_OF_FILE // Define END_OF_FILE token type
-} token_type_t;
+    END_OF_FILE
+} token_type_t; //alias for enum
 
-// Struct to represent a token
-typedef struct {
-    token_type_t type;
-    char* text;
-} token_t;
+typedef struct { //define token structure
+    token_type_t type; //token type
+    char* text; //text of token
+} token_t; //alias for struct
 
-// Function prototypes
-token_t* get_next_token(char **input);
-void classify_token(token_t *token);
+token_t* get_next_token(char **input); //func. prototype for next token
+void classify_token(token_t *token); //func. prototype for token classification
+const char *token_type_to_string(enum token_type_t type); //func. prototype to convert to string
 
-// Function to convert token type to string
-const char *token_type_to_string(enum token_type_t type);
-
-#endif // TOKEN_H
+#endif //end of ifndef

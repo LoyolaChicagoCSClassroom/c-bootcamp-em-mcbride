@@ -1,33 +1,39 @@
-#include "token.h"
-#include <stdlib.h>
-#include <string.h>
+#include "token.h" //token header file
+#include <stdlib.h> //standard library - memory allocation
+#include <string.h> //string manipulation
 
-// Function to create a new token
+//function for token creation!
 token_t* create_token(token_type_t type, const char* text) {
+    //allocate token memory
     token_t* token = (token_t*)malloc(sizeof(token_t));
+    //check if mem allocation fails
     if (token == NULL) {
-        fprintf(stderr, "Error: Failed to allocate memory for token.\n");
+        fprintf(stderr, "Error: Failed to allocate token memory.\n");
         exit(EXIT_FAILURE);
     }
-    token->type = type;
-    token->text = strdup(text);
+
+    token->type = type; //assign token type
+    token->text = strdup(text); //copy text, assign to token
+    
+    //check if text allocation fails
     if (token->text == NULL) {
-        fprintf(stderr, "Error: Failed to allocate memory for token text.\n");
-        free(token);  // Free token memory
-        exit(EXIT_FAILURE);
+        fprintf(stderr, "Error: Failed to allocate mem for token text.\n");
+        free(token);  //free mem
+        exit(EXIT_FAILURE); //exit with failure
     }
-    return token;
+
+    return token; //return created token
 }
 
-// Function to free memory allocated for a token
+//free token memory function
 void free_token(token_t* token) {
-    free(token->text);
-    free(token);
+    free(token->text); //text
+    free(token); //token
 }
 
-// Function to convert token type to string
+//function for token to string
 const char *token_type_to_string(enum token_type_t type) {
-    switch (type) {
+    switch (type) { //switch based on type
         case NUMBER:
             return "Number";
         case OPERATOR:
